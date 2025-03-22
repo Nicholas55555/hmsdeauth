@@ -1,4 +1,4 @@
 sudo apt update
 sudo apt install python3 python3-pip aircrack-ng python3-scapy  # essential
-sudo pip3 install pyfiglet
+
 
