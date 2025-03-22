@@ -10,7 +10,7 @@ import random
 import signal
 import threading  # <-- We'll use threading instead of multiprocessing for ASCII
 from typing import Dict, List, Tuple, Optional
-
+from art import text2art
 from scapy.all import (
     sniff,
     sendp,
@@ -36,21 +36,7 @@ minimal_init_logging()
 # 1) Plain ASCII Banner (instead of Pyfiglet)
 # ------------------------------------------------------------------------------
 def show_banner():
-    """
-    Simple ASCII banner, no pyfiglet needed.
-    """
-    banner = r"""
- _   _                       _                          
-| | | | ___  _ __ ___   __ _| | ___ _ __ ___   ___  ___ 
-| |_| |/ _ \| '_ ` _ \ / _` | |/ _ \ '_ ` _ \ / _ \/ __|
-|  _  | (_) | | | | | | (_| | |  __/ | | | | |  __/\__ \
-|_| |_|\___/|_| |_| |_|\__,_|_|\___|_| |_| |_|\___||___/
-           ___  ___   _   _             _       
-          / __|/ _ \ | \ | | ___   __ _(_)_ __  
-          \__ \ (_) ||  \| |/ _ \ / _` | | '_ \ 
-          |___/\___(_)_|\_|\___/ \__, |_|_| |_|
-                                |___/           
-    """
+    banner = text2art("Homing Missile\nSalvo Deauth", font='doom')
     print(banner)
 
 
@@ -185,7 +171,7 @@ def show_missile_launch():
     """
     Just prints ASCII missile volley
     """
-    print("\n===== LAUNCHING MISSILES =====\n")
+    print("\n======== LAUNCHING MISSILES ========\n")
     art = r"""
             /\
            /  \
@@ -743,3 +729,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
