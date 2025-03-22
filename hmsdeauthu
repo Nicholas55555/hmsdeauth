@@ -36,10 +36,8 @@ minimal_init_logging()
 # 1) Plain ASCII Banner (instead of Pyfiglet)
 # ------------------------------------------------------------------------------
 def show_banner():
-    banner1 = text2art("Homing Missile\n Salvo Deauth\n", font='doom')
-    banner2 = text2art("", font='doom')
-    print(banner1)
-    print(banner2)
+    banner1 = text2art("Homing Missile\n Salvo Deauth", font='doom')
+    print(banner)
 
 
 # ------------------------------------------------------------------------------
