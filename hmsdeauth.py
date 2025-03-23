@@ -383,14 +383,9 @@ def client_sniff_callback(pkt, bssid: str, client_set: set):
     if pkt.haslayer(Dot11):
         if pkt.addr3 and pkt.addr3.lower() == bssid.lower():
             if pkt.addr1 and pkt.addr1.lower() != bssid.lower():
-                client_mac = pkt.addr1.lower()
-                if client_mac != "ff:ff:ff:ff:ff:ff":
-                    client_set.add(client_mac)
+                client_set.add(pkt.addr1.lower())
             if pkt.addr2 and pkt.addr2.lower() != bssid.lower():
-                client_mac = pkt.addr2.lower()
-                if client_mac != "ff:ff:ff:ff:ff:ff":
-                    client_set.add(client_mac)
-
+                client_set.add(pkt.addr2.lower())
 
 
 def quick_sniff_bssid(iface: str, channel: int, target_bssid: str, sniff_time=0.2) -> bool:
@@ -421,7 +416,8 @@ def scan_for_clients(iface: str, bssid: str, channel: int, sniff_time=2) -> list
     sniff(iface=iface,
           prn=lambda p: client_sniff_callback(p, bssid, s),
           timeout=sniff_time, store=False)
-    return list(s)
+    return [c for c in s if c != "ff:ff:ff:ff:ff:ff"]
+
 
 
 # Deauth logic (unchanged)
@@ -657,6 +653,7 @@ def main():
     for bssid, info in discovered.items():
         ch = info["ch"]
         found_clients = scan_for_clients(base_iface, bssid, ch, sniff_time=2)
+        found_clients = [c for c in found_clients if c != "ff:ff:ff:ff:ff:ff"]  # Redundant but safe
         info["client_count"] = len(found_clients)
 
 
