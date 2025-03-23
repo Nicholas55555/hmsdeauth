@@ -415,7 +415,8 @@ def scan_for_clients(iface: str, bssid: str, channel: int, sniff_time=2) -> list
     sniff(iface=iface,
           prn=lambda p: client_sniff_callback(p, bssid, s),
           timeout=sniff_time, store=False)
-    return list(s)
+    return [c for c in s if c != "ff:ff:ff:ff:ff:ff"]
+
 
 
 # ------------------------------------------------------------------------------
@@ -649,11 +650,12 @@ def main():
         time.sleep(2)
         anim_thread.start()
 
-    # For each discovered BSSID, gather client info
     for bssid, info in discovered.items():
         ch = info["ch"]
         found_clients = scan_for_clients(base_iface, bssid, ch, sniff_time=2)
+        found_clients = [c for c in found_clients if c != "ff:ff:ff:ff:ff:ff"]  # Redundant but safe
         info["client_count"] = len(found_clients)
+
 
     # Stop the radar
     stop_anim.set()
