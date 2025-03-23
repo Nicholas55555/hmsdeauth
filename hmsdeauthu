@@ -46,7 +46,7 @@ def show_banner():
 def animation_radar_thread(stop_event):
     frames = [
         r"""
-[ Radar ] Scanning... [=       ]
+[Radar] Scanning... [=       ]
 
    ┌───────────────┐
    │       .       │
@@ -59,7 +59,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [==      ]
+[Radar] Scanning... [==      ]
 
    ┌───────────────┐
    │             . │
@@ -72,7 +72,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [===     ]
+[Radar] Scanning... [===     ]
 
    ┌───────────────┐
    │               │
@@ -85,7 +85,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [====    ]
+[Radar] Scanning... [====    ]
 
    ┌───────────────┐
    │               │
@@ -98,7 +98,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [=====   ]
+[Radar] Scanning... [=====   ]
 
    ┌───────────────┐
    │               │
@@ -111,7 +111,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [======  ]
+[Radar] Scanning... [======  ]
 
    ┌───────────────┐
    │               │
@@ -124,7 +124,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [======= ]
+[Radar] Scanning... [======= ]
 
    ┌───────────────┐
    │               │
@@ -137,7 +137,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [========]
+[Radar] Scanning... [========]
 
    ┌───────────────┐
    │ .             │
@@ -698,6 +698,7 @@ def main():
 
     # Show missile launch
     show_missile_launch()
+    time.sleep(3)
 
     # Final client scan
     clients = scan_for_clients(base_iface, bssid, ch, sniff_time=2)
@@ -729,4 +730,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
