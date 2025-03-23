@@ -379,10 +379,13 @@ def client_sniff_callback(pkt, bssid: str, client_set: set):
     if pkt.haslayer(Dot11):
         if pkt.addr3 and pkt.addr3.lower() == bssid.lower():
             if pkt.addr1 and pkt.addr1.lower() != bssid.lower():
-                client_set.add(pkt.addr1.lower())
+                client_mac = pkt.addr1.lower()
+                if client_mac != "ff:ff:ff:ff:ff:ff":
+                    client_set.add(client_mac)
             if pkt.addr2 and pkt.addr2.lower() != bssid.lower():
-                client_set.add(pkt.addr2.lower())
-
+                client_mac = pkt.addr2.lower()
+                if client_mac != "ff:ff:ff:ff:ff:ff":
+                    client_set.add(client_mac)
 
 def quick_sniff_bssid(iface: str, channel: int, target_bssid: str, sniff_time=0.2) -> bool:
     set_channel(iface, channel)
