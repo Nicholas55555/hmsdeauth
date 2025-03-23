@@ -49,7 +49,7 @@ def animation_radar_thread(stop_event):
     frames = [
 
         r"""
-[ Radar ] Scanning... [=       ]
+[Radar] Scanning... [=       ]
 
    ┌───────────────┐
    │       .       │
@@ -62,7 +62,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [==      ]
+[Radar] Scanning... [==      ]
 
    ┌───────────────┐
    │             . │
@@ -75,7 +75,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [===     ]
+[Radar] Scanning... [===     ]
 
    ┌───────────────┐
    │               │
@@ -88,7 +88,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [====    ]
+[Radar] Scanning... [====    ]
 
    ┌───────────────┐
    │               │
@@ -101,7 +101,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [=====   ]
+[Radar] Scanning... [=====   ]
 
    ┌───────────────┐
    │               │
@@ -114,7 +114,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [======  ]
+[Radar] Scanning... [======  ]
 
    ┌───────────────┐
    │               │
@@ -127,7 +127,7 @@ def animation_radar_thread(stop_event):
    └───────────────┘
 """,
         r"""
-[ Radar ] Scanning... [======= ]
+[Radar] Scanning... [======= ]
 
    ┌───────────────┐
    │               │
@@ -141,7 +141,7 @@ def animation_radar_thread(stop_event):
 """
 ,
         r"""
-[ Radar ] Scanning... [========]
+[Radar] Scanning... [========]
 
    ┌───────────────┐
    │ .             │
@@ -700,10 +700,11 @@ def main():
     f = Figlet(font='slant')
     print(f.renderText("\nTARGET AQUIRED :"))
     print(f.renderText("\n"+essid))
+    time.sleep(3)
 
     # Show missile launch (one-off)
     show_missile_launch()
-
+    time.sleep(3)
     clients = scan_for_clients(base_iface, bssid, ch, sniff_time=2)
     print(f"[+] {bssid} (ch={ch}) => found {len(clients)} client(s): {clients}")
 
