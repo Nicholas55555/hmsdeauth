@@ -413,7 +413,7 @@ def scan_for_bssids(iface: str, channels: list, dwell=1) -> dict:
     return discovered
 
 
-def scan_for_clients(iface: str, bssid: str, channel: int, sniff_time=2) -> list:
+def scan_for_clients(iface: str, bssid: str, channel: int, sniff_time=3) -> list:
     set_channel(iface, channel)
     s = set()
     sniff(iface=iface,
@@ -543,7 +543,7 @@ def supervisor_single_bssid(bssid: str, channel: int, clients: list, iface: str,
                 new_channel = current_ch
                 print(f"[Supervisor:{bssid}] Still on ch {current_ch}, refreshing clients.")
                 set_channel(iface, current_ch)
-                new_clients = scan_for_clients(iface, bssid, current_ch, sniff_time=2)
+                new_clients = scan_for_clients(iface, bssid, current_ch, sniff_time=3)
                 clients = new_clients
             else:
                 new_channel = -1
@@ -561,7 +561,7 @@ def supervisor_single_bssid(bssid: str, channel: int, clients: list, iface: str,
                 if new_channel != current_ch:
                     print(f"[Supervisor:{bssid}] BSSID moved from {current_ch} to {new_channel}")
                     set_channel(iface, new_channel)
-                    new_clients = scan_for_clients(iface, bssid, new_channel, sniff_time=2)
+                    new_clients = scan_for_clients(iface, bssid, new_channel, sniff_time=3)
                     print(f"[Supervisor:{bssid}] Found {len(new_clients)} client(s) on new channel.")
                     clients = new_clients
                     current_ch = new_channel
@@ -655,7 +655,7 @@ def main():
 
     for bssid, info in discovered.items():
         ch = info["ch"]
-        found_clients = scan_for_clients(base_iface, bssid, ch, sniff_time=2)
+        found_clients = scan_for_clients(base_iface, bssid, ch, sniff_time=3)
         found_clients = [c for c in found_clients if c != "ff:ff:ff:ff:ff:ff"]  # Redundant but safe
         info["client_count"] = len(found_clients)
 
@@ -710,7 +710,7 @@ def main():
     # Show missile launch (one-off)
     show_missile_launch()
     time.sleep(3)
-    clients = scan_for_clients(base_iface, bssid, ch, sniff_time=2)
+    clients = scan_for_clients(base_iface, bssid, ch, sniff_time=3)
     print(f"[+] {bssid} (ch={ch}) => found {len(clients)} client(s): {clients}")
 
     # Start supervisor
